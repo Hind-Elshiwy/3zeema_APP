@@ -1,0 +1,82 @@
+<form #f="ngForm">
+  <input
+    ngModel
+    required
+    email
+    name="email"
+    #email
+    type="email"
+    placeholder="Email"
+    class="form-control"
+  />
+  <input
+    ngModel
+    required
+    minlength="6"
+    name="password"
+    #password
+    type="password"
+    placeholder="Password"
+    class="form-control"
+  />
+  <input
+    ngModel
+    required
+    name="name"
+    #name
+    type="text"
+    placeholder="Name"
+    class="form-control"
+  />
+  <input
+    ngModel
+    required
+    name="fullName"
+    #fullName
+    type="text"
+    placeholder="Full Name"
+    class="form-control"
+  />
+  <select ngModel required name="email" #project class="form-control">
+    <option value="" disabled>Choose Project</option>
+    <option *ngFor="let p of projects; index as i" value="{{ i }}">{{
+      p.name
+    }}</option>
+  </select>
+  <input
+    ngModel
+    required
+    name="image"
+    #image
+    type="file"
+    class="form-control"
+    (change)="fileChangeEvent($event)"
+  />
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    [resizeToWidth]="128"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+  <button
+    [disabled]="f.invalid || adding"
+    class="btn btn-primary"
+    (click)="
+      addUser(
+        email.value,
+        password.value,
+        name.value,
+        fullName.value,
+        project.value
+      )
+    "
+  >
+    Add User
+  </button>
+  <br /><br />
+  <p class="alert alert-primary" *ngIf="adding">Adding User</p>
+  <p class="alert alert-success" *ngIf="success">User Added Successfully</p>
+  <p class="alert alert-danger" *ngIf="error">{{ error }}</p>
+</form>

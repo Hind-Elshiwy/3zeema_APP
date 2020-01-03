@@ -1,0 +1,65 @@
+<input type="date" #date />
+<button class="btn btn-primary" (click)="show(date.value)">Show</button>
+<br />
+<br />
+<table id="table">
+  <thead>
+    <td>no</td>
+    <td>Employee ID</td>
+    <td>Employee name</td>
+    <td>Project name</td>
+    <td>Check in date</td>
+    <td>Check out date</td>
+    <td>Check in time</td>
+    <td>Check out time</td>
+    <td>Check in image</td>
+    <td>Check out image</td>
+    <td>Google map link</td>
+  </thead>
+  <tr *ngFor="let d of data">
+    <td>{{ d["no"] }}</td>
+    <td
+      style="max-width: 20px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+    >
+      {{ d["Employee ID"] }}
+    </td>
+    <td>{{ d["Employee name"] }}</td>
+    <td>{{ d["Project name"] }}</td>
+    <td>{{ d["Check in date"] }}</td>
+    <td>{{ d["Check out date"] }}</td>
+    <td>{{ d["Check in time"] }}</td>
+    <td>{{ d["Check out time"] }}</td>
+    <td>
+      <img
+        *ngIf="d['Check in image']"
+        width="50px"
+        height="50px"
+        src="{{ d['Check in image'] }}"
+        alt=""
+      />
+      <span *ngIf="!d['Check in image']">not available</span>
+    </td>
+    <td>
+      <img
+        *ngIf="d['Check out image']"
+        width="50px"
+        height="50px"
+        src="{{ d['Check out image'] }}"
+        alt=""
+      />
+      <span *ngIf="!d['Check out image']">not available</span>
+    </td>
+    <td>
+      <a *ngIf="d['Google map link']" href="{{ d['Google map link'] }}">{{
+        d["Google map link"]
+      }}</a>
+      <span *ngIf="!d['Google map link']">not available</span>
+    </td>
+  </tr>
+</table>
+
+<br />
+<div>
+  <button class="btn btn-primary" (click)="exel()">Export Exel File</button>
+  <button class="btn btn-primary" (click)="pdf()">Export PDF File</button>
+</div>

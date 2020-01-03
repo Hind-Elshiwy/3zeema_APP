@@ -1,0 +1,32 @@
+<table>
+  <thead>
+    <td>no</td>
+    <td>Name</td>
+    <td>Area Size</td>
+    <td>Location</td>
+    <td></td>
+  </thead>
+  <tr *ngFor="let project of projects; index as i">
+    <td>{{ i + 1 }}</td>
+    <td>{{ project.name }}</td>
+    <td>{{ project.areaSize }}</td>
+    <td>
+      <a
+        href="https://www.google.com/maps?q={{ project.location.latitude }},{{
+          project.location.longitude
+        }}"
+        target="_blank"
+        >Show Location</a
+      >
+    </td>
+    <td>
+      <a
+        class="btn btn-primary"
+        style="margin-right: 10px"
+        routerLink="/projects/{{ project.id }}"
+        >Edit</a
+      >
+      <button class="btn btn-danger" (click)="delete(i)">Delete</button>
+    </td>
+  </tr>
+</table>

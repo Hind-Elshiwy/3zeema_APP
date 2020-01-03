@@ -1,0 +1,41 @@
+<!---->
+<!---->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <img style="background: #fff" width="100px" height="60px" src="../assets/png 1.png" />
+    <button (click)="navOpen = !navOpen" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse"
+      type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div *ngIf="isAdmin" [class.show]="navOpen" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!---->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Attendance" routerLinkActive="active" routerLinkActiveOptions="{exact: true}">Attendance</a>
+        </li>
+        <!---->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/add-user" routerLinkActive="active">Add User</a>
+        </li>
+        <!---->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/add-project" routerLinkActive="active">Add Project</a>
+        </li>
+        <!---->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+        </li>
+        <!---->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/projects" routerLinkActive="active">Projects</a>
+        </li>
+      </ul>
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+<br />
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

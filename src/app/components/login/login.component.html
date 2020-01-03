@@ -1,0 +1,29 @@
+<form #f="ngForm">
+  <input
+    class="form-control"
+    type="email"
+    name="email"
+    required
+    email
+    ngModel
+    placeholder="Email"
+  />
+  <input
+    class="form-control"
+    type="password"
+    name="password"
+    required
+    minlength="6"
+    ngModel
+    placeholder="Password"
+  />
+  <button
+    class="btn btn-primary"
+    type="button"
+    (click)="login(f)"
+    [disabled]="f.invalid || loging"
+  >
+    Login
+  </button>
+</form>
+<p class="alert alert-danger" *ngIf="error">{{ error }}</p>

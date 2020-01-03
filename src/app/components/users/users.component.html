@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <td>no</td>
+    <th>Profile Image</th>
+    <td>Name</td>
+    <td>Fullname</td>
+    <td>Email</td>
+    <td>Project</td>
+    <td></td>
+  </thead>
+  <tr *ngFor="let user of users; index as i">
+    <td>{{ i + 1 }}</td>
+    <th>
+      <img src="{{ user.image }}" />
+    </th>
+    <td>{{ user.name }}</td>
+    <td>{{ user.fullName }}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ user.project.name }}</td>
+    <td>
+      <a class="btn btn-primary" routerLink="/users/{{ user.id }}">Edit</a>
+    </td>
+  </tr>
+</table>

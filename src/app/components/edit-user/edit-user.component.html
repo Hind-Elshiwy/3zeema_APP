@@ -1,0 +1,90 @@
+<form #f="ngForm">
+  <div class="row">
+    <div class="col col-12 col-md-6">
+      <img
+        src="{{ user.image }}"
+        width="100px"
+        height="100px"
+        style="margin-right: 10px"
+      />
+      <input
+        ngModel
+        name="image"
+        #image
+        type="file"
+        (change)="fileChangeEvent($event)"
+      />
+    </div>
+    <div class="col col-12 col-md-6">
+      <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        [resizeToWidth]="128"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col col-12 col-md-1">Email:</div>
+    <div class="col col-12 col-md-11">{{ user.username }}</div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col col-12 col-md-1">Name:</div>
+    <div class="col col-12 col-md-11">
+      <input
+        [(ngModel)]="user.name"
+        class="form-control"
+        name="name"
+        required=""
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-12 col-md-1">Fullname:</div>
+    <div class="col col-12 col-md-11">
+      <input
+        [(ngModel)]="user.fullName"
+        class="form-control"
+        name="fullname"
+        required=""
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-12 col-md-1">Project:</div>
+    <div class="col col-12 col-md-11">
+      <select
+        [(ngModel)]="user.project"
+        required
+        name="email"
+        #project
+        class="form-control"
+      >
+        <option value="" disabled>Choose Project</option>
+        <option *ngFor="let p of projects; index as i" value="{{ i }}">{{
+          p.name
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="text-center">
+    <button
+      [disabled]="f.invalid || adding"
+      class="btn btn-primary"
+      (click)="save()"
+    >
+      Save Changes
+    </button>
+    <br /><br />
+    <p class="alert alert-primary" *ngIf="adding">Saving User</p>
+    <p class="alert alert-success" *ngIf="success">User Saved Successfully</p>
+    <p class="alert alert-danger" *ngIf="error">{{ error }}</p>
+    <br /><br /><!----><!----><!---->
+  </div>
+</form>

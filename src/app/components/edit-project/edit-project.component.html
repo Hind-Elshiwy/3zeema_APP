@@ -1,0 +1,27 @@
+<form [formGroup]="projectForm" (ngSubmit)="save()">
+  <input formControlName="projectName" type="text" class="form-control" placeholder="Name"/>
+  <input formControlName="areaSize" type="number" class="form-control" placeholder="Area Size" />
+  <input formControlName="long" type="number" class="form-control" placeholder="Longitude" (input)="changeMarker()" />
+  <input formControlName="lat" type="number" class="form-control" placeholder="Latitude" (input)="changeMarker()" />
+  <div #map style="width: 100%; height: 400px; position: relative; overflow: hidden;"></div>
+  <h2>Branches</h2>
+    <div>
+      <div formArrayName="branches" *ngFor="let branch of projectForm.get('branches').controls; let i = index;">
+        <div [formGroupName]="i">
+          <input formControlName="name" placeholder="Item name">
+          <input formControlName="areaSize" type="number" placeholder="areaSize">
+          <input formControlName="long" type="number" placeholder="Longitude">
+          <input formControlName="lat" type="number" placeholder="Latitude">
+        </div>
+      </div>
+    </div>
+    <div class="btn btn-warning" (click)="addBranch()">Add Branch</div> <br /><br />
+  <br />
+  <button class="btn btn-primary" type="submit" [disabled]="!projectForm.valid">
+    Save
+  </button>
+  <br /><br>
+  <p class="alert alert-primary" *ngIf="adding">Saving Project</p>
+  <p class="alert alert-success" *ngIf="success">Project Saved Successfully</p>
+  <p class="alert alert-danger" *ngIf="error">{{ error }}</p>
+</form>
